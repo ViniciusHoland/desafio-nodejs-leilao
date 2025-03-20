@@ -14,4 +14,37 @@ model User {
   name     String
   email    String  @unique
   password String 
+
+  auctions Auction[] // Relacionamento: um usuário pode criar vários leilões
+  bids     Bid[]     // Relacionamento: um usuário pode dar vários lances
 }
+
+model Auction {
+  id        Int     @id @default(autoincrement())
+  brand    String
+  modelo   String
+  year      Int
+  startPrice Float
+
+  highestBidderId Int? // lance mais alto atual 
+  status   String  @default("ACTIVE")
+  ended    Boolean @default(false)
+  createdAt DateTime @default(now())
+  expiration DateTime
+  userId Int 
+   user      User   @relation(fields: [userId], references: [id])
+  bids      Bid[]  // Relacionamento: um leilão pode ter vários lances
+}
+
+model Bid {
+  id       Int     @id @default(autoincrement())
+  userId   Int
+  auctionId Int
+  price    Float
+  createdAt DateTime @default(now())
+
+  user    User   @relation(fields: [userId], references: [id])
+  auction Auction @relation(fields: [auctionId], references: [id])
+
+}
+
