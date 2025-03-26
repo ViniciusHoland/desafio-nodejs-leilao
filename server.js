@@ -4,6 +4,7 @@ import { PrismaClient } from '@prisma/client';
 import login from './routes/publics/login.js';
 import register from './routes/publics/register.js';
 import cadastroVeiculo from './routes/privates/cadastroVeiculo.js';
+import listarVeiculo from './routes/privates/listarVeiculos.js';
 
 
 
@@ -34,6 +35,7 @@ app.use(express.json())
 app.use( login)
 app.use( register)
 app.use(cadastroVeiculo)
+app.use(listarVeiculo)
 
 
 
