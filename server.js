@@ -1,8 +1,11 @@
 import express from 'express';
 import dotenv from 'dotenv'
+import { PrismaClient } from '@prisma/client';
 import login from './routes/publics/login.js';
 import register from './routes/publics/register.js';
-import { PrismaClient } from '@prisma/client';
+import cadastroVeiculo from './routes/privates/cadastroVeiculo.js';
+
+
 
 
 const app = express();
@@ -30,6 +33,7 @@ app.use(express.json())
 
 app.use( login)
 app.use( register)
+app.use(cadastroVeiculo)
 
 
 
